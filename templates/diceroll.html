@@ -1,0 +1,19 @@
+<html>
+	<title>Dice Roller</title>
+	<head>
+		<script src = {{url_for("static", filename = "brython/brython.js")}}></script>
+		<script src = {{url_for("static", filename = "brython/brython_stdlib.js")}}></script>
+		<meta charset = "utf-8">
+	</head>
+	<body onload = "brython()">
+		<script type = "text/python" src = {{url_for("static", filename = "brythonDice.py")}}></script>
+		<div id = "box">
+			<h2>Click a button below to roll a die</h2>
+			<input id = "value" type = "text" disabled>
+			<label id = "die">???</label> <br>
+			{%for die in dice%}
+			<input type = "button" value = "{{die}}" id = "{{die}}"> <br>
+			{%endfor%}
+		<div>
+	</body>
+</html>
