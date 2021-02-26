@@ -26,16 +26,13 @@ def ajaxPost():
 
 def login():
 	if fl.request.method == "GET":
-		print("IN GET")
 		if "user" in fl.session:
-			print("LOGGED IN")
 			return fl.render_template("loggedIn.html", user = fl.session["user"])
 		else:
-			print("NOT LOGGED IN")
 			return fl.render_template("login.html")
 	elif fl.request.method == "POST":
 		fl.session["user"] = fl.request.form["user"]
-		return fl.redirect(fl.url_for("userpage"))
+		return fl.url_for("userpage")
 
 def logout():
 	del fl.session["user"]
