@@ -1,8 +1,7 @@
 from browser import document, ajax
+import json
 
 def setLabel(request):
-#	print("in setLabel")
-#	print(request.status)
 	if request.status == 200:
 		document["result"].innerHTML = request.text
 		document["result"].style = {"visibility" : "visible"}
@@ -14,7 +13,8 @@ def squarePress(event):
 	number = document["number"].value
 	ajax.post(
 		"/ajax/post",
-		data = {"number" : number},
+		headers = {"Content-Type" : "application/json"},
+		data = json.dumps({"number" : number}),
 		oncomplete = setLabel
 	)
 

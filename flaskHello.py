@@ -18,12 +18,16 @@ def dice():
 
 def ajaxPost():
 	if fl.request.method == "POST":
-		try:
-			x = int(fl.request.form["number"])
-		except ValueError:
-			return "ValueError: Cannot parse as int"
-
-		return fl.jsonify(x ** 2)
+		print(fl.request.content_type)
+		if fl.request.is_json:
+			print("JSON Detected.")
+			try:
+				x = int(fl.request.get_json()["number"])
+			except ValueError:
+				return "ValueError: Cannot parse as int"
+			return fl.jsonify(x ** 2)
+		else:
+			return "Data not JSON"
 
 def login():
 	if fl.request.method == "GET":
