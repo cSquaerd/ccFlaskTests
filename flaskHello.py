@@ -24,8 +24,8 @@ def ajaxPost():
 			try:
 				x = int(fl.request.get_json()["number"])
 			except ValueError:
-				return "ValueError: Cannot parse as int"
-			return fl.jsonify(x ** 2)
+				return fl.jsonify({"error" : "ValueError: Cannot parse as int"})
+			return fl.jsonify({"result" : x ** 2})
 		else:
 			return "Data not JSON"
 

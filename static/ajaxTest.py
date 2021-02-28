@@ -2,8 +2,14 @@ from browser import document, ajax
 import json
 
 def setLabel(request):
+	reply = json.loads(request.text)
 	if request.status == 200:
-		document["result"].innerHTML = request.text
+		if "result" in reply:
+			print("Correct result from server")
+			document["result"].innerHTML = reply["result"]
+		else:
+			print("Server encountered and error")
+			document["result"].innerHTML = reply["error"]
 		document["result"].style = {"visibility" : "visible"}
 	else:
 		print("AJAX Error:", request.status, request.text)
